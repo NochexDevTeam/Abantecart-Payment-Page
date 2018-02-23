@@ -3,7 +3,7 @@ Nochex Module for Abantecart
 
 Installation
 ============
-To Install and Setup the Nochex module please follow our integration guide, which can be found here: https://support.nochex.com/kb/faq.php?id=126
+To Install and Setup the Nochex module please follow our integration guide, which can be found <A href="https://support.nochex.com/kb/faq.php?id=126">here</a>
 
 Support
 =====================
