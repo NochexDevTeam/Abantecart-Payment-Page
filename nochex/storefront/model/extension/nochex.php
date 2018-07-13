@@ -21,7 +21,7 @@ if (!defined('DIR_CORE')) {
 	header('Location: static_pages/');
 }
 
-class ModelExtensionnochex extends Model {
+class ModelExtensionNochex extends Model {
 	public function getMethod($address) {
 		$this->load->language('nochex/nochex');
 

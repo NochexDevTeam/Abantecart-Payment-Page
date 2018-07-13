@@ -25,23 +25,18 @@ if (!defined('DIR_CORE')) {
  * @property ModelCheckoutOrder $model_checkout_order
  */
  
-class ControllerResponsesExtensionnochex extends AController {
-
+class ControllerResponsesExtensionNochex extends AController {
 	public function main() {
 		$this->loadLanguage('nochex/nochex');
-		
 		$template_data['button_confirm'] = $this->language->get('button_confirm');
-		$template_data['button_back'] = $this->language->get('button_back');
-		
+		$template_data['button_back'] = $this->language->get('button_back');	
 		$this->load->model('checkout/order');
-
-		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-		
+		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);		
 		$debugInfo = "Order Information: " . $this->session->data['order_id'];
 		$this->nochex_debug($debugInfo);
 		//Nochex Link
 
-		$template_data['action'] = 'https://secure.nochex.com/default.aspx?';
+		$template_data['action'] = 'https://secure.nochex.com/default.aspx';
 		
 		// Nochex parameters
 		$template_data['merchant_id'] = $this->config->get('nochex_account');
@@ -52,7 +47,7 @@ class ControllerResponsesExtensionnochex extends AController {
 		$this->nochex_debug($orderDetails);
 		
 		//$order_info['shipping_method']
-		if ($this->config->get('hide_billing_details') == 1){
+		if ($this->config->get('nochex_postage') == 1){
 		
 		$template_data['amount'] = $this->currency->format($order_info['total'], $order_info['currency'], $order_info['value'], FALSE) - $this->session->data['shipping_method']['cost'];
 		$template_data['postage'] = $this->currency->format($this->session->data['shipping_method']['cost'], $order_info['currency'], $order_info['value'], FALSE);
@@ -63,19 +58,24 @@ class ControllerResponsesExtensionnochex extends AController {
 		
 		$shipping = $this->session->data['shipping_method']['cost'];
 		
-		if ($this->config->get('hide_billing_details') == 1){
-		$template_data['billing_fullname'] = "";
-		$template_data['billing_address'] = "";
-		$template_data['billing_city'] = "";
-		$template_data['billing_postcode'] = "";
-		$template_data['customer_phone_number'] = "";
-		}else{
 		$template_data['billing_fullname'] = $order_info['payment_firstname'] . ', ' . $order_info['payment_lastname'];
 		$template_data['billing_address'] = $order_info['payment_address_1'];	
 		$template_data['billing_city'] = $order_info['payment_city'];
 		$template_data['billing_postcode'] = $order_info['payment_postcode'];
-		$template_data['customer_phone_number'] = $order_info['telephone'];		
+		$template_data['customer_phone_number'] = str_replace("+", "", $order_info['telephone']);	
+		
+		if ($this->config->get('nochex_callback') == 1){
+			$template_data['optional_2'] = "ENABLED";
+		}else{
+			$template_data['optional_2'] = "";
 		}
+		 
+		if ($this->config->get('hide_billing_details') == 1){
+			$template_data['hide_billing_details'] = "true";
+		}else{
+			$template_data['hide_billing_details'] = "false";
+		}
+		
 		$template_data['email_address'] = $order_info['email'];
 		
 		$billAddress = "Order Information - Template_Data - Billing Address - : " . $template_data['billing_fullname'] . ", " . $template_data['billing_address'] . ", " . $template_data['billing_postcode'] . ", " . $template_data['customer_phone_number'] . ", " . $template_data['email_address'] . ", ";
@@ -112,18 +112,13 @@ class ControllerResponsesExtensionnochex extends AController {
 		$products = $this->cart->getProducts();
 		
 		if($this->config->get('nochex_xml') == 1){
-		
 		$template_data['xml_item_collection'] = "<items>";
-		
-		
 		foreach ($products as $product) {
 			$template_data['xml_item_collection'] .= "<item><id>" . $product['product_id'] . "</id><name>" . $product['name'] . "</name><description>" . $product['name'] . ", ". $product['model']  ."</description><quantity>" . $product['quantity'] . "</quantity><price>". $this->currency->format($product['price'], $order_info['currency'], $order_info['value'], FALSE)."</price></item>";
 		}
 		
 		$template_data['xml_item_collection'] .= "</items>";
-		
 		$template_data['description'] = "Order created for: ". $this->session->data['order_id'];
-		
 		
 		}else{
 		
@@ -146,7 +141,6 @@ class ControllerResponsesExtensionnochex extends AController {
 		}
 		$tempInfo = "Order Information - Template_Data - Description - : " . $template_data['description'] . ", ";
 		$this->nochex_debug($tempInfo);
-		
 		$this->view->batchAssign($template_data);
 		$this->processTemplate('responses/nochex.tpl');
 	}
@@ -188,58 +182,85 @@ class ControllerResponsesExtensionnochex extends AController {
 	}
 	
 	public function callback() {
-	
 		$this->load->model('checkout/order');
 		$order_id = (int)$this->request->post['order_id'];
 		$order_info = $this->model_checkout_order->getOrder($order_id);
 		$this->load->model('extension/nochex');
-		
 		$postvars = http_build_query($_POST);
+		
+		if (isset($_POST["optional_2"]) == "ENABLED"){
 		//
 		// Set parameters for the email
 		//
 		$to = '';
-$url = "https://www.nochex.com/apcnet/apc.aspx";
-
-// Curl code to post variables back
-$ch = curl_init(); // Initialise the curl tranfer
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_VERBOSE, true);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars); // Set POST fields
-curl_setopt($ch, CURLOPT_HTTPHEADER, "Host: www.nochex.com");
-curl_setopt($ch, CURLOPT_POSTFIELDSIZE, 0); 
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_TIMEOUT, 60); // set connection time out variable - 60 seconds	
-//curl_setopt ($ch, CURLOPT_SSLVERSION, 6); // set openSSL version variable to CURL_SSLVERSION_TLSv1
-$output = curl_exec($ch); // Post back
-curl_close($ch);
-		
-
-		
+		$url = "https://secure.nochex.com/callback/callback.aspx";
+		// Curl code to post variables back
+		$ch = curl_init(); // Initialise the curl tranfer
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_VERBOSE, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars); // Set POST fields
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: secure.nochex.com"));
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60); // set connection time out variable - 60 seconds	
+		curl_setopt ($ch, CURLOPT_SSLVERSION, 6); // set openSSL version variable to CURL_SSLVERSION_TLSv1
+		$output = curl_exec($ch); // Post back
+		curl_close($ch);
 		if ($this->config->get('nochex_test') == 1){
-		
-		$testt = 'This was a test transaction!';
-		
+			$testt = 'This was a test transaction!';
+		}else{
+			$testt = 'This was a live transaction!';
+		}
+		if ($output == "AUTHORISED") {   
+			mail($to,"APC - Authorised"," APC Output:". $output);
+			$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') ,'Status updated by Nochex, APC Authorised! ' . $testt);
+			$tempUrl = "Callback - Output Details - Authorised : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 5";
+			$this->nochex_debug($tempUrl);
+		}else if ($output == "Declined"){
+			mail($to,"APC - Declined"," APC Output:". $output);
+			$this->model_checkout_order->confirm($order_id, 10 ,'Status updated by Nochex, APC Declined! '. $testt);
+			$tempUrl = "Callback - Output Details - Declined : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 10";
+			$this->nochex_debug($tempUrl);
 		}
 		
+		}else{
+		//
+		// Set parameters for the email
+		//
+		$to = '';
+		$url = "https://www.nochex.com/apcnet/apc.aspx";
+		// Curl code to post variables back
+		$ch = curl_init(); // Initialise the curl tranfer
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_VERBOSE, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars); // Set POST fields
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: www.nochex.com"));
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 60); // set connection time out variable - 60 seconds	
+		curl_setopt ($ch, CURLOPT_SSLVERSION, 6); // set openSSL version variable to CURL_SSLVERSION_TLSv1
+		$output = curl_exec($ch); // Post back
+		curl_close($ch);
+		if ($this->config->get('nochex_test') == 1){
+			$testt = 'This was a test transaction!';
+		}else{
+			$testt = 'This was a live transaction!';
+		}
 		if ($output == "AUTHORISED") {   
-		
-		mail($to,"APC - Authorised"," APC Output:". $output);
-		$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') ,'Status updated by Nochex, APC Authorised! ' . $testt);
-		
-		$tempUrl = "Callback - Output Details - Authorised : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 5";
-		$this->nochex_debug($tempUrl);
-		
+			mail($to,"APC - Authorised"," APC Output:". $output);
+			$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') ,'Status updated by Nochex, APC Authorised! ' . $testt);
+			$tempUrl = "Callback - Output Details - Authorised : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 5";
+			$this->nochex_debug($tempUrl);
 		}else if ($output == "Declined"){
-		
-		mail($to,"APC - Declined"," APC Output:". $output);
-		$this->model_checkout_order->confirm($order_id, 10 ,'Status updated by Nochex, APC Declined! '. $testt);
-		
-		$tempUrl = "Callback - Output Details - Declined : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 10";
-		$this->nochex_debug($tempUrl);
+			mail($to,"APC - Declined"," APC Output:". $output);
+			$this->model_checkout_order->confirm($order_id, 10 ,'Status updated by Nochex, APC Declined! '. $testt);
+			$tempUrl = "Callback - Output Details - Declined : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 10";
+			$this->nochex_debug($tempUrl);
+		}
 		
 		}
 	}
