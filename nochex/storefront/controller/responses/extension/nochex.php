@@ -214,13 +214,19 @@ class ControllerResponsesExtensionNochex extends AController {
 			$testt = 'This was a live transaction!';
 		}
 		if ($output == "AUTHORISED") {   
-			mail($to,"APC - Authorised"," APC Output:". $output);
-			$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') ,'Status updated by Nochex, APC Authorised! ' . $testt);
+			mail($to,"Callback - Authorised"," Callback Output:". $output);
+			$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') );
+			
+			$this->model_checkout_order->updatePaymentMethodData($order_id,'Status updated by Nochex, Callback Authorised! ' . $testt);
+			
 			$tempUrl = "Callback - Output Details - Authorised : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 5";
 			$this->nochex_debug($tempUrl);
 		}else if ($output == "Declined"){
-			mail($to,"APC - Declined"," APC Output:". $output);
-			$this->model_checkout_order->confirm($order_id, 10 ,'Status updated by Nochex, APC Declined! '. $testt);
+			mail($to,"Callback - Declined"," Callback Output:". $output);
+			$this->model_checkout_order->confirm($order_id, 10);
+			
+			$this->model_checkout_order->updatePaymentMethodData($order_id,'Status updated by Nochex, Callback Declined! '. $testt);
+			
 			$tempUrl = "Callback - Output Details - Declined : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 10";
 			$this->nochex_debug($tempUrl);
 		}
@@ -252,12 +258,14 @@ class ControllerResponsesExtensionNochex extends AController {
 		}
 		if ($output == "AUTHORISED") {   
 			mail($to,"APC - Authorised"," APC Output:". $output);
-			$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') ,'Status updated by Nochex, APC Authorised! ' . $testt);
+			$this->model_checkout_order->confirm($order_id, $this->config->get('nochex_order_status_id') );
+			$this->model_checkout_order->updatePaymentMethodData($order_id,'Status updated by Nochex, APC Authorised! ' . $testt);
 			$tempUrl = "Callback - Output Details - Authorised : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 5";
 			$this->nochex_debug($tempUrl);
 		}else if ($output == "Declined"){
 			mail($to,"APC - Declined"," APC Output:". $output);
-			$this->model_checkout_order->confirm($order_id, 10 ,'Status updated by Nochex, APC Declined! '. $testt);
+			$this->model_checkout_order->confirm($order_id, 10);
+			$this->model_checkout_order->updatePaymentMethodData($order_id,'Status updated by Nochex, APC Declined! '. $testt);
 			$tempUrl = "Callback - Output Details - Declined : ". $output . ", Order ID : " . $order_id . ", Nochex Order Status ID : 10";
 			$this->nochex_debug($tempUrl);
 		}
