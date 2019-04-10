@@ -13,6 +13,12 @@ Visit our Knowledgebase for support: https://support.nochex.com/
 Changelog
 =====================
 
+= 1.2.3 =
+
+*Bug Fixes
+
+  - APC / Callback - Response added to order notes / customer comment opposed to adding to payment method data. **Resolved
+
 = 1.2.2 =
 
 *Bug Fixes
