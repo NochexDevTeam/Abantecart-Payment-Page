@@ -13,6 +13,13 @@ Visit our Knowledgebase for support: https://support.nochex.com/
 Changelog
 =====================
 
+= 1.2.4 =
+
+*Bug Fixes
+
+  - Nochex module was not showing on list of installable extensions in Abantecart
+  - Test mode issue
+
 = 1.2.3 =
 
 *Bug Fixes
