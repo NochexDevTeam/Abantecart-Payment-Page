@@ -63,6 +63,11 @@ class ControllerResponsesExtensionNochex extends AController {
 		$template_data['billing_city'] = $order_info['payment_city'];
 		$template_data['billing_postcode'] = $order_info['payment_postcode'];
 		$template_data['customer_phone_number'] = str_replace("+", "", $order_info['telephone']);	
+		if ($this->config->get('nochex_test') == 1){
+			$template_data['test'] = 100;
+		}else {
+			$template_data['test'] = "";
+		}
 		
 		if ($this->config->get('nochex_callback') == 1){
 			$template_data['optional_2'] = "ENABLED";
