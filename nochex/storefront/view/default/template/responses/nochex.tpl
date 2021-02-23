@@ -19,7 +19,8 @@
 	<input type="hidden" name="delivery_postcode" value="<?php echo $delivery_postcode; ?>"/>
 	<input type="hidden" name="description" value="<?php echo $description; ?>" />
 	<input type="hidden" name="test_success_url" value="<?php echo $test_success_url; ?>"/>
-	<input type="hidden" name="test_transaction" value="100"/>		<input type="hidden" name="hide_billing_details" value="<?php echo $hide_billing_details; ?>"/>	
+	<input type="hidden" name="test_transaction" value="<?php echo $test; ?>"/>
+	<input type="hidden" name="hide_billing_details" value="<?php echo $hide_billing_details; ?>"/>	
 	<input type="hidden" name="success_url" value="<?php echo $success_url; ?>"/>
 	<input type="hidden" name="callback_url" value="<?php echo $callback_url; ?>"/>
 	<input type="hidden" name="cancel_url" value="<?php echo $cancel_url; ?>"/>
