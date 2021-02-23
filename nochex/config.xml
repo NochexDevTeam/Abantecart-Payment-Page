@@ -1,96 +1,86 @@
-<?xml version="1.0"?>
-<extension>
-	<id>Nochex</id>
-	<version>1.2.1</version>
-	<type>payment</type>
-	<category>payment</category>
-	<cartversions>
-		<item>0.9</item>
-		<item>1.0</item>
-		<item>1.1</item>
-		<item>1.2.1</item>
-	</cartversions>
-	<layout></layout>
-	<priority>10</priority>
-	<settings>
-		<item id="nochex_account">
-			<type required="true">input</type>
-			<default_value></default_value>
-		</item>
-		<item id="nochex_test">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<item>1</item>
-			</variants>
-		</item>	
-		
-		<item id="nochex_xml">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<item>1</item>
-			</variants>
-		</item>	
-		
-		<item id="nochex_postage">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<item>1</item>
-			</variants>
-		</item>	
-
-		<item id="nochex_callback">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<item>1</item>				
-			</variants>			
-		</item>
-	
-		<item id="hide_billing_details">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<item>1</item>				
-			</variants>			
-		</item>
-		<item id="nochex_debug">
-			<type>selectbox</type>
-			<variants>				
-				<item>0</item>
-				<item>1</item>
-			</variants>			
-		</item>
-		<item id="nochex_order_status_id">
-			<type>selectbox</type>
-			<variants>
-				<data_source>
-					<model_rt>localisation/order_status</model_rt>
-					<method>getOrderStatuses</method>
-				</data_source>
-				<fields>
-					<field>order_status_id</field>
-					<field>name</field>
-				</fields>
-			</variants>
-			<default_value>2</default_value>
-		</item>
-		<item id="nochex_location_id">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<data_source>
-					<model_rt>localisation/location</model_rt>
-					<method>getLocations</method>
-				</data_source>
-				<fields>
-					<field>location_id</field>
-					<field>name</field>
-				</fields>
-			</variants>
-		</item>
-	</settings>
-	<note>false</note>
+<?xml version="1.0"?>
+<extension>
+	<id>nochex</id>
+	<version>1.2.4</version>
+	<type>payment</type>
+	<category>payment</category>
+	<cartversions>
+		<item>1.2</item>
+	</cartversions>
+	<layout></layout>
+	<priority>10</priority>
+	<settings>
+		<item id="nochex_account">
+			<type required="true">input</type>
+			<default_value></default_value>
+		</item>
+		<item id="nochex_test">
+			<type>selectbox</type>
+			<variants>
+				<item>0</item>
+				<item>1</item>
+			</variants>
+		</item>		<item id="nochex_xml">
+			<type>selectbox</type>
+			<variants>
+				<item>0</item>
+				<item>1</item>
+			</variants>
+		</item><item id="nochex_postage">
+			<type>selectbox</type>
+			<variants>
+				<item>0</item>
+				<item>1</item>
+			</variants>
+		</item><item id="nochex_callback">
+			<type>selectbox</type>
+			<variants>
+				<item>0</item>
+				<item>1</item>				
+			</variants>			
+		</item><item id="hide_billing_details">
+			<type>selectbox</type>
+			<variants>
+				<item>0</item>
+				<item>1</item>				
+			</variants>			
+		</item><item id="nochex_debug">
+			<type>selectbox</type>
+			<variants>				
+				<item>0</item>
+				<item>1</item>
+			</variants>			
+		</item>
+		<item id="nochex_order_status_id">
+			<type>selectbox</type>
+			<variants>
+				<data_source>
+					<model_rt>localisation/order_status</model_rt>
+					<method>getOrderStatuses</method>
+				</data_source>
+				<fields>
+					<field>order_status_id</field>
+					<field>name</field>
+				</fields>
+			</variants>
+			<default_value>2</default_value>
+		</item>
+		<item id="nochex_location_id">
+			<type>selectbox</type>
+			<variants>
+				<item>0</item>
+				<data_source>
+					   
+					<model_rt>localisation/location</model_rt>
+					   
+					<method>getLocations</method>
+				</data_source>
+				<fields>
+					<field>location_id</field>
+					<field>name</field>
+				</fields>
+			</variants>
+		</item>
+	</settings>
+	<note>true</note>
 </extension>
