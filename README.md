@@ -13,6 +13,10 @@ Visit our Knowledgebase for support: https://support.nochex.com/
 Changelog
 =====================
 
+= 1.2.5 =
+
+  - Small feature update
+  
 = 1.2.4 =
 
 *Bug Fixes
