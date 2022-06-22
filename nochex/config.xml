@@ -32,12 +32,6 @@
 				<item>0</item>
 				<item>1</item>
 			</variants>
-		</item><item id="nochex_callback">
-			<type>selectbox</type>
-			<variants>
-				<item>0</item>
-				<item>1</item>				
-			</variants>			
 		</item><item id="hide_billing_details">
 			<type>selectbox</type>
 			<variants>

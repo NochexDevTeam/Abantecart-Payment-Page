@@ -1,150 +1,135 @@
-<?xml version="1.0"?>
-<definitions>
-	<definition>
-		<key>nochex_name</key>
-		<value><![CDATA[Nochex]]></value>
-	</definition>
-	<definition>
-		<key>nochex_note</key>
-		<value><![CDATA[Complete all the necessary fields below;]]></value>
-	</definition>
-	<definition>
-		<key>text_payment</key>
-		<value><![CDATA[Payment]]></value>
-	</definition>
-	
-	<definition>
-		<key>text_success</key>
-		<value><![CDATA[Success: You have modified nochex account details!]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_account</key>
-		<value><![CDATA[Nochex Merchant ID / Email Address: <span class="help">Your Nochex Merchant ID / Email Address for example: @test123@test.com</span>]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_debug</key>
-		<value><![CDATA[Debugging Mode: <span class="help">Log Nochex actions, such as APC requests and issues with the Nochex module.</span>]]></value>
-	</definition>
-		
-	<definition>
-		<key>nochex_debug_1</key>
-		<value><![CDATA[Yes]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_debug_0</key>
-		<value><![CDATA[No]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_test</key>
-		<value><![CDATA[Test Mode: <span class="help">This feature allows you to perform test transactions and test your module works. Note: Make sure this option is disabled for live transactions.</span>]]></value>
-	</definition>
-
-	<definition>
-		<key>nochex_test_1</key>
-		<value><![CDATA[Yes]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_test_0</key>
-		<value><![CDATA[No]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_callback</key>
-		<value><![CDATA[Callback: <span class="help">To use the callback feature and functionality, please contact Nochex Support to enable this functionality on your account otherwise this function won't work!</span>]]></value>
-	</definition>
-
-	<definition>
-		<key>nochex_callback_1</key>
-		<value><![CDATA[Yes]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_callback_0</key>
-		<value><![CDATA[No]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_xml</key>
-		<value><![CDATA[Detailed Product Information: <span class="help">This feature will show a detailed and structured list of will be displayed on your Nochex Payment Page</span>]]></value>
-	</definition>
-
-	<definition>
-		<key>nochex_xml_1</key>
-		<value><![CDATA[Yes]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_xml_0</key>
-		<value><![CDATA[No]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_postage</key>
-		<value><![CDATA[Show Postage: <span class="help">This feature allows postage to be displayed on your Nochex payment page.</span>]]></value>
-	</definition>
-
-	<definition>
-		<key>nochex_postage_1</key>
-		<value><![CDATA[Yes]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_postage_0</key>
-		<value><![CDATA[No]]></value>
-	</definition>
-		
-	<definition>
-		<key>nochex_order_status_id</key>
-		<value><![CDATA[Order Status: <span class="help">The status that you want orders to be once a customer has made a successful payment.</span>]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_location_id</key>
-		<value><![CDATA[Location:]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_location_id_0</key>
-		<value><![CDATA[All Locations]]></value>
-	</definition>
-	
-	<definition>
-		<key>hide_billing_details</key>
-   		<value><![CDATA[Hide Billing Details: <span class="help">This feature allows billing address details to be hidden on your Nochex payment page, but this could cause issues with customers entering details incorrectly. <br/><br/> <span style="color:red">We advise you to place a note on your checkout page to inform customers to check the billing address details match the address details on the card.</span></span>]]></value>
-	</definition>
-	
-	<definition>
-		<key>hide_billing_details_1</key>
-		<value><![CDATA[Yes]]></value>
-	</definition>
-	
-	<definition>
-		<key>hide_billing_details_0</key>
-		<value><![CDATA[No]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_status</key>
-		<value><![CDATA[Status:]]></value>
-	</definition>
-	
-	<definition>
-		<key>nochex_sort_order</key>
-   		<value><![CDATA[Sort Order:<br /><span class="help">Number to indicate display position of this payment in relation to over enabled payments </span>]]></value>
-	</definition>
-	
-	<definition>
-		<key>error_permission</key>
-		<value><![CDATA[Warning: You do not have permission to modify payment nochex!]]></value>
-	</definition>
-	
-	<definition>
-		<key>error_account</key>
-		<value><![CDATA[Nochex Account Required!]]></value>
-	</definition>
-</definitions>
+<?xml version="1.0"?>
+<definitions>
+	<definition>
+		<key>nochex_name</key>
+		<value><![CDATA[Nochex]]></value>
+	</definition>
+	<definition>
+		<key>nochex_note</key>
+		<value><![CDATA[Complete all the necessary fields below;]]></value>
+	</definition>
+	<definition>
+		<key>text_payment</key>
+		<value><![CDATA[Payment]]></value>
+	</definition>
+	
+	<definition>
+		<key>text_success</key>
+		<value><![CDATA[Success: You have modified nochex account details!]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_account</key>
+		<value><![CDATA[Nochex Merchant ID / Email Address: <span class="help">Your Nochex Merchant ID / Email Address for example: @test123@test.com</span>]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_debug</key>
+		<value><![CDATA[Debugging Mode: <span class="help">Log Nochex actions, such as APC requests and issues with the Nochex module.</span>]]></value>
+	</definition>
+		
+	<definition>
+		<key>nochex_debug_1</key>
+		<value><![CDATA[Yes]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_debug_0</key>
+		<value><![CDATA[No]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_test</key>
+		<value><![CDATA[Test Mode: <span class="help">This feature allows you to perform test transactions and test your module works. Note: Make sure this option is disabled for live transactions.</span>]]></value>
+	</definition>
+
+	<definition>
+		<key>nochex_test_1</key>
+		<value><![CDATA[Yes]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_test_0</key>
+		<value><![CDATA[No]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_xml</key>
+		<value><![CDATA[Detailed Product Information: <span class="help">This feature will show a detailed and structured list of will be displayed on your Nochex Payment Page</span>]]></value>
+	</definition>
+
+	<definition>
+		<key>nochex_xml_1</key>
+		<value><![CDATA[Yes]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_xml_0</key>
+		<value><![CDATA[No]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_postage</key>
+		<value><![CDATA[Show Postage: <span class="help">This feature allows postage to be displayed on your Nochex payment page.</span>]]></value>
+	</definition>
+
+	<definition>
+		<key>nochex_postage_1</key>
+		<value><![CDATA[Yes]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_postage_0</key>
+		<value><![CDATA[No]]></value>
+	</definition>
+		
+	<definition>
+		<key>nochex_order_status_id</key>
+		<value><![CDATA[Order Status: <span class="help">The status that you want orders to be once a customer has made a successful payment.</span>]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_location_id</key>
+		<value><![CDATA[Location:]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_location_id_0</key>
+		<value><![CDATA[All Locations]]></value>
+	</definition>
+	
+	<definition>
+		<key>hide_billing_details</key>
+   		<value><![CDATA[Hide Billing Details: <span class="help">This feature allows billing address details to be hidden on your Nochex payment page, but this could cause issues with customers entering details incorrectly. <br/><br/> <span style="color:red">We advise you to place a note on your checkout page to inform customers to check the billing address details match the address details on the card.</span></span>]]></value>
+	</definition>
+	
+	<definition>
+		<key>hide_billing_details_1</key>
+		<value><![CDATA[Yes]]></value>
+	</definition>
+	
+	<definition>
+		<key>hide_billing_details_0</key>
+		<value><![CDATA[No]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_status</key>
+		<value><![CDATA[Status:]]></value>
+	</definition>
+	
+	<definition>
+		<key>nochex_sort_order</key>
+   		<value><![CDATA[Sort Order:<br /><span class="help">Number to indicate display position of this payment in relation to over enabled payments </span>]]></value>
+	</definition>
+	
+	<definition>
+		<key>error_permission</key>
+		<value><![CDATA[Warning: You do not have permission to modify payment nochex!]]></value>
+	</definition>
+	
+	<definition>
+		<key>error_account</key>
+		<value><![CDATA[Nochex Account Required!]]></value>
+	</definition>
+</definitions>
