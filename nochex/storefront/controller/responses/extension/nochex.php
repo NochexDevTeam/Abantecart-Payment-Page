@@ -241,7 +241,7 @@ class ControllerResponsesExtensionNochex extends AController {
 		// Set parameters for the email
 		//
 		$to = '';
-		$url = "https://www.nochex.com/apcnet/apc.aspx";
+		$url = "https://secure.nochex.com/apc/apc.aspx";
 		// Curl code to post variables back
 		$ch = curl_init(); // Initialise the curl tranfer
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -250,10 +250,6 @@ class ControllerResponsesExtensionNochex extends AController {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars); // Set POST fields
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Host: www.nochex.com"));
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 60); // set connection time out variable - 60 seconds	
-		curl_setopt ($ch, CURLOPT_SSLVERSION, 6); // set openSSL version variable to CURL_SSLVERSION_TLSv1
 		$output = curl_exec($ch); // Post back
 		curl_close($ch);
 		if ($this->config->get('nochex_test') == 1){
