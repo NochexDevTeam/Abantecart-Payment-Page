@@ -13,6 +13,10 @@ Visit our Knowledgebase for support: https://support.nochex.com/
 
 Changelog
 =====================
+= 1.2.7 =
+
+  - Small change to APC page
+
 = 1.2.6 =
 
   - Update config file to show compatibility with latest Abantecart version
